@@ -1,4 +1,6 @@
 from game.terminal_service import TerminalService
+from game.word import Word
+from game.parachute import Parachute
 
 """
     Update the code and the comments as you change the code for your game.  You will be graded on following the
@@ -15,6 +17,8 @@ class Director:
     Attributes:
         is_playing (boolean): Whether or not to keep playing.
         terminal_service: For getting and displaying information on the terminal.
+        word: The word being played.
+        guess: The current guessed letter
     """
         #the word being guessed
 
@@ -26,8 +30,9 @@ class Director:
         """
         self._is_playing = True
         self._terminal_service = TerminalService()
-
-        #call the class to generate the random word, as an array
+        self._word = Word()
+        self._word.generate_word()
+        self._guess = ""
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -47,12 +52,19 @@ class Director:
             self (Director): An instance of Director.
         """
 
+        print(self._word._hidden)#comment this out
+        print(self._word._solved)#comment this out  
+
         #get input from user
         #input validation [only letters a-z]
 
-
-
+        self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
+        while not (self._guess.isalpha()) or (len(self._guess) != 1):
+            self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
+        #print("Good")#comment out
+        
         pass
+
 
     def _do_updates(self):
         """Update this comment
@@ -60,6 +72,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+
         #check the letter against the characters in the word.
 
         #if letter in word:
@@ -67,6 +80,22 @@ class Director:
             #remove letter from the array of the hidden word
         #else:
             #remove a line from the parachute
+
+
+
+        if self._guess in self._word._hidden:
+            for i in self._word._hidden:
+                if i == self._guess:
+                   index = self._word._hidden.index(i)
+                   self._word._solved[index] = i
+                   self._word._hidden[index] = ""
+        #else:
+            
+            #remove a line from the parachute
+
+
+
+        
 
         pass
 
