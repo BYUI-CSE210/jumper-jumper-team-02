@@ -16,6 +16,7 @@ class Director:
         is_playing (boolean): Whether or not to keep playing.
         terminal_service: For getting and displaying information on the terminal.
     """
+        #the word being guessed
 
     def __init__(self):
         """Constructs a new Director.
@@ -25,6 +26,8 @@ class Director:
         """
         self._is_playing = True
         self._terminal_service = TerminalService()
+
+        #call the class to generate the random word, as an array
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -43,6 +46,12 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+
+        #get input from user
+        #input validation [only letters a-z]
+
+
+
         pass
 
     def _do_updates(self):
@@ -51,6 +60,14 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        #check the letter against the characters in the word.
+
+        #if letter in word:
+            #add letter to the solved portion of the word
+            #remove letter from the array of the hidden word
+        #else:
+            #remove a line from the parachute
+
         pass
 
     def _do_outputs(self):
@@ -59,4 +76,9 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+
+        #print out the current state of the parachute
+
+        #print out the current solved portion of the word.
+
         pass
