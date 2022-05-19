@@ -53,7 +53,7 @@ class Director:
         """
 
         print(self._word._hidden)#comment this out
-        print(self._word._solved)#comment this out  
+        print(self._word._solved)#keep this  
 
         #get input from user
         #input validation [only letters a-z]
