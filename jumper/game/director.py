@@ -31,8 +31,11 @@ class Director:
         self._is_playing = True
         self._terminal_service = TerminalService()
         self._word = Word()
+        self._parachute = Parachute()
         self._word.generate_word()
         self._guess = ""
+        #parachute picture string
+        self.parachute = " _____\n/_____\ \n \   /\n  \ /\n   0\n  /|\ \n  / \ \n \n^^^^^^^  "
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -54,7 +57,7 @@ class Director:
 
         print(self._word._hidden)#comment this out
         print(self._word._solved)#keep this  
-
+        print(self.parachute)   # print parachute picture string
         #get input from user
         #input validation [only letters a-z]
 
@@ -81,6 +84,9 @@ class Director:
         #else:
             #remove a line from the parachute
 
+
+        #print parachute
+        self._parachute.print_parachute()
 
 
         if self._guess in self._word._hidden:
