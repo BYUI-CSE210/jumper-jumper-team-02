@@ -17,8 +17,10 @@ class Director:
 
     Attributes:
         is_playing (boolean): Whether or not to keep playing.
+        win (boolean): Have we lost or won the game?
         terminal_service: For getting and displaying information on the terminal.
-        word: The word being played.
+        parachute: The drawing of the parachute and our lose condition
+        word: The word being guessed and our win condition
         guess: The current guessed letter
     """
         #the word being guessed
@@ -34,15 +36,10 @@ class Director:
         self._terminal_service = TerminalService()
         self._parachute = Parachute()
         self._guess = ""
-
         self._word = Word()
-        self._word._difficulty = input("Choose your difficulty: [easy/hard]")
-        while self._word._difficulty not in ["easy", "hard"]:
-            self._word._difficulty = input("Choose your difficulty: [easy/hard]")
 
-        self._word.generate_word()
-        
-        
+        self._opening_moves()
+
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -64,32 +61,31 @@ class Director:
         else:
             print("\n\nYou lose!")
 
+
     def _get_inputs(self):
-        """Update this comment
+        """Receives the new guessed letter from the user
 
         Args:
             self (Director): An instance of Director.
         """
 
-
-        
-        print(self._word._hidden)#comment these out
+        #print(self._word._hidden)#comment these out
         for i in self._word._solved:
             print(f"{i} ", end = "")  
-    
 
         #get input from user
         #input validation [only letters a-z]
 
         self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
         while not (self._guess.isalpha()) or (len(self._guess) != 1):
+            print("Invalid entry!")
             self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
-        
+
         pass
 
 
     def _do_updates(self):
-        """Update this comment
+        """Check the guessed letter, update the word, update the parachute
 
         Args:
             self (Director): An instance of Director.
@@ -111,14 +107,12 @@ class Director:
                    self._word._solved[index] = i
                    self._word._hidden[index] = ""
         else:
-                #CHANGE THIS TO FIT SYNTAX
             self._parachute._drawing.pop(0)
             self._parachute._counter += 1
-
         pass
 
     def _do_outputs(self):
-        """Update this comment
+        """Prints the current state of the parachute, and checks to see if we've won or lost the game
 
         Args:
             self (Director): An instance of Director.
@@ -145,5 +139,20 @@ class Director:
             if self._parachute._counter == self._parachute._death:
                 self._is_playing = False
                 self._win = False
-
         pass
+
+
+    def _opening_moves(self):
+        """Prints opening speil and gets difficulty
+
+        Args:
+            self (Director): An instance of Director.
+        """
+
+        print("Welcome to Jumper! A word guessing game where you try to guess all the letters of the given word! \n")
+
+        self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
+        while self._word._difficulty not in ["easy", "medium", "hard"]:
+            self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
+
+        self._word.generate_word()

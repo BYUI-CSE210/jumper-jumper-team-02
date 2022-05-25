@@ -6,9 +6,12 @@ class Word:
     The responsibility of Word is to generate the random word, and keep track of what has been solved and left unsolved.
     
     Attributes:
-        _master_list (List[str]): A list of possible words to choose from
+        _easy_list (List[str]): A list of possible easy words to choose from
+        _medium_list (List[str]): A list of possible medium words to choose from
+        _hard_list (List[str]): A list of possible hard words to choose from
         _hidden_word (str): The hidden portion of the word.
         _solved_word (str): The solved portion of the word.
+        _difficulty (str): Which list to pick our word from
     """
 
     def __init__(self):
@@ -33,6 +36,12 @@ class Word:
       Args:
         self (Word): An instance of Word.
       """
+
+          #method that generates a random word from the list
+      #sets that as hidden_word
+      #sets an empty array the length of hidden_word as solved_word
+
+
       # assign the guess list according to the level of difficulty
       if self._difficulty.lower() == "easy":
         choice = random.choice(self._easy_list)
@@ -44,13 +53,3 @@ class Word:
       for _ in range(len(self._hidden)):
         self._solved.append("_")
 
-    #method that generates a random word from the list
-      #sets that as hidden_word
-      #sets an empty array the length of hidden_word as solved_word
-
-
-      #random.choice(self._master_list)
-
-    
-    #method that takes a letter as an argument
-      #if its in hidden_word, removes each of those letters that match and adds those letters to the correct spots on solved_word

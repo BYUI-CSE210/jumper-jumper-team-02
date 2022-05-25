@@ -18,10 +18,3 @@ class Parachute:
         self._drawing = ["  _____", " /_____\\", " \     /", "  \   /", "   \ /", "    0", "   /|\\", "   / \\", "", "^^^^^^^^^^"]
         self._counter = 0
         self._death = 5
-
-
-
-    
-      
-    
-    
