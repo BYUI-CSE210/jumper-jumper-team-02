@@ -15,15 +15,13 @@ class Parachute:
         Args:
             self (parachute): An instance of parachute.
         """
-        self.leedle = ""
+        self._drawing = ["  _____", " /_____\\", " \     /", "  \   /", "   \ /", "    0", "   /|\\", "   / \\", "", "^^^^^^^^^^"]
+        self._counter = 0
+        self._death = 5
 
 
-    def something(self):
-      self.leedle = ""
+
+    
+      
     
     
-    # def print_parachute(self):
-    #     """print parachute picture string"""
-
-    #     self._terminal_service.write_text(self, self.parachute)
-

@@ -30,14 +30,15 @@ class Director:
             self (Director): an instance of Director.
         """
         self._is_playing = True
+        self._win = True
         self._terminal_service = TerminalService()
         self._parachute = Parachute()
         self._guess = ""
 
         self._word = Word()
-        self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
-        while self._word._difficulty not in ["easy", "medium", "hard"]:
-            self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
+        self._word._difficulty = input("Choose your difficulty: [easy/hard]")
+        while self._word._difficulty not in ["easy", "hard"]:
+            self._word._difficulty = input("Choose your difficulty: [easy/hard]")
 
         self._word.generate_word()
         
@@ -55,6 +56,14 @@ class Director:
             self._do_updates()
             self._do_outputs()
 
+        for i in self._word._solved:
+            print(f"{i} ", end = "") 
+
+        if self._win == True:
+            print("\n\nCongratulations! You win!")
+        else:
+            print("\n\nYou lose!")
+
     def _get_inputs(self):
         """Update this comment
 
@@ -62,10 +71,12 @@ class Director:
             self (Director): An instance of Director.
         """
 
+
+        
         print(self._word._hidden)#comment these out
         for i in self._word._solved:
             print(f"{i} ", end = "")  
-        
+    
 
         #get input from user
         #input validation [only letters a-z]
@@ -101,8 +112,8 @@ class Director:
                    self._word._hidden[index] = ""
         else:
                 #CHANGE THIS TO FIT SYNTAX
-            self._parachute.drawing.pop(0)
-            self._parachute.counter += 1
+            self._parachute._drawing.pop(0)
+            self._parachute._counter += 1
 
         pass
 
@@ -118,11 +129,21 @@ class Director:
         #print out the current solved portion of the word.
 
             #CHANGE THIS TO FIT SYNTAX
-        print(self._parachute.drawing())
+        for i in self._parachute._drawing:
+            print(i)
 
-        for i in self._word._solved:
-            print(f"{i} ")
+        #Check to see if we lost or won the game
 
-        
+            #check to see if the word is solved by checking word.hidden for letters
+        self._is_playing = False
+        for i in self._word._hidden:
+            if i != "":
+                self._is_playing = True
+
+            #check to see if we ran out of parachute
+        if self._is_playing == True:
+            if self._parachute._counter == self._parachute._death:
+                self._is_playing = False
+                self._win = False
 
         pass
