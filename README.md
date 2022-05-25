@@ -40,6 +40,7 @@ root                    (project root folder)
 * Python 3.8.0
 
 ## Authors
+* Baron Tshibasu
 * Moises Parra Lozano
 * Siarhei Herman
 * Michael Porter Oleson
