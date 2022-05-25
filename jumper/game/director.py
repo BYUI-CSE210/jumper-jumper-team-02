@@ -37,11 +37,8 @@ class Director:
         self._parachute = Parachute()
         self._guess = ""
         self._word = Word()
-<<<<<<< Updated upstream
 
         self._opening_moves()
-
-=======
 
         # The user chooses the level of difficulty
         self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
@@ -50,9 +47,6 @@ class Director:
 
         self._word.generate_word() # call the generate_word method from the word class
         
-        
->>>>>>> Stashed changes
-
     def start_game(self):
         """Starts the game by running the main game loop.
 
@@ -81,12 +75,9 @@ class Director:
             self (Director): An instance of Director.
         """
 
-<<<<<<< Updated upstream
-        #print(self._word._hidden)#comment these out
-=======
         # Print hidden word
         print(self._word._hidden)
->>>>>>> Stashed changes
+
         for i in self._word._solved:
             print(f"{i} ", end = "")  
 
@@ -95,13 +86,9 @@ class Director:
 
         self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
         while not (self._guess.isalpha()) or (len(self._guess) != 1):
-<<<<<<< Updated upstream
-            print("Invalid entry!")
+            #print("Invalid entry!")
+            self._terminal_service.write_text("Invalid entry!") # print an error message
             self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
-
-=======
-            self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")        
->>>>>>> Stashed changes
         pass
 
 
