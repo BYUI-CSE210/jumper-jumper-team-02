@@ -1,4 +1,4 @@
-
+from game.terminal_service import TerminalService
 
 class Parachute:
     """The parachute that's tracking how close to losing the player is. 
@@ -16,6 +16,15 @@ class Parachute:
             self (parachute): An instance of parachute.
         """
         self.leedle = ""
+        #parachute picture string
+        self.parachute = " _____\n/_____\ \n \   /\n  \ /\n   0\n  /|\ \n  / \ \n \n^^^^^^^  "
 
     def something(self):
       self.leedle = ""
+    
+    
+    def print_parachute(self):
+        """print parachute picture string"""
+        
+        self._terminal_service.write_text(self, self.parachute)
+
