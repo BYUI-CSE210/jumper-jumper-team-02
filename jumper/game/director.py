@@ -102,6 +102,9 @@ class Director:
         #else:
             
             #remove a line from the parachute
+        else:
+            self.parachute = self.parachute[1:] #remove first charachter from the parachute
+            
 
 
 
