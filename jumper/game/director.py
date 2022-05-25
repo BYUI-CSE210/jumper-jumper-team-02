@@ -1,7 +1,7 @@
 from game.terminal_service import TerminalService
 from game.word import Word
 from game.parachute import Parachute
-from game.bcolors import Bcolors
+#from game.bcolors import Bcolors       #what
 
 
 """
@@ -37,7 +37,9 @@ class Director:
         self._word.generate_word()
         self._guess = ""
         #parachute picture string
-        self.parachute = " _____\n/_____\ \n \   /\n  \ /\n   0\n  /|\ \n  / \ \n \n^^^^^^^  "
+        
+            #what
+        #self._parachute = " _____\n/_____\ \n \   /\n  \ /\n   0\n  /|\ \n  / \ \n \n^^^^^^^  "
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -59,8 +61,10 @@ class Director:
 
         print(self._word._hidden)#comment this out
         print(self._word._solved)#keep this  
-        print(self.parachute)   # print parachute picture string
-        print(f"{Bcolors.WARNING}{self.parachute}{Bcolors.ENDC}")
+        
+            #what
+        #print(self._parachute)   # print parachute picture string
+        #print(f"{Bcolors.WARNING}{self._parachute}{Bcolors.ENDC}")
 
         #get input from user
         #input validation [only letters a-z]
@@ -103,7 +107,10 @@ class Director:
             
             #remove a line from the parachute
         else:
-            self.parachute = self.parachute[1:] #remove first charachter from the parachute
+            self._parachute.pop(0)
+
+                #what
+            #self._parachute = self._parachute[1:] #remove first charachter from the parachute
             
 
 
@@ -122,5 +129,9 @@ class Director:
         #print out the current state of the parachute
 
         #print out the current solved portion of the word.
+
+        self._parachute._print_parachute()
+
+        self._parachute._print_solved()
 
         pass
