@@ -1,6 +1,8 @@
 from game.terminal_service import TerminalService
 from game.word import Word
 from game.parachute import Parachute
+from game.bcolors import Bcolors
+
 
 """
     Update the code and the comments as you change the code for your game.  You will be graded on following the
@@ -58,6 +60,8 @@ class Director:
         print(self._word._hidden)#comment this out
         print(self._word._solved)#keep this  
         print(self.parachute)   # print parachute picture string
+        print(f"{Bcolors.WARNING}{self.parachute}{Bcolors.ENDC}")
+
         #get input from user
         #input validation [only letters a-z]
 
@@ -86,7 +90,7 @@ class Director:
 
 
         #print parachute
-        self._parachute.print_parachute()
+        # self._parachute.print_parachute()
 
 
         if self._guess in self._word._hidden:
