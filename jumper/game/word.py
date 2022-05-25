@@ -36,12 +36,16 @@ class Word:
       Args:
         self (Word): An instance of Word.
       """
+<<<<<<< Updated upstream
 
           #method that generates a random word from the list
       #sets that as hidden_word
       #sets an empty array the length of hidden_word as solved_word
 
 
+=======
+      #method that generates a random word from the list
+>>>>>>> Stashed changes
       # assign the guess list according to the level of difficulty
       if self._difficulty.lower() == "easy":
         choice = random.choice(self._easy_list)
@@ -49,7 +53,24 @@ class Word:
         choice = random.choice(self._medium_list)
       else:
         choice = random.choice(self._hard_list)
+
+      #sets that as hidden_word
+      #sets an empty array the length of hidden_word as solved_word
       self._hidden = list(choice)
+      
       for _ in range(len(self._hidden)):
         self._solved.append("_")
 
+<<<<<<< Updated upstream
+=======
+    
+      
+      
+
+
+      #random.choice(self._master_list)
+
+    
+    #method that takes a letter as an argument
+      #if its in hidden_word, removes each of those letters that match and adds those letters to the correct spots on solved_word
+>>>>>>> Stashed changes
