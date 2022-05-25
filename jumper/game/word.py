@@ -17,10 +17,13 @@ class Word:
         Args:
             self (Word): An instance of Word.
         """
-        self._master_list = 'wipe square death magnificent calculator famous marble petite aware paddle brave zoo tan bushes fine huge waiting confess overjoyed shocking picayune hushed hilarious female shame stimulating bore dinner doctor obsequious corn scribble pump year heartbreaking rabid haunt arrive serious confused loud educated pack oafish nation shy sticky helpful reading recognise'.split() #come up with list of words
+        self._easy_list = 'square death magnificent calculator famous marble petite aware paddle brave bushes waiting confess overjoyed shocking hushed hilarious female shame stimulating dinner doctor scribble heartbreaking rabid haunt arrive serious confused educated oafish nation sticky helpful reading recognise'.split() #come up with list of words
+        self._hard_list = 'abruptly absurd abyss affix askew avenue awkward axiom azure bagpipes bandwagon banjo bayou beekeeper bikini blitz blizzard boggle bookworm boxcar boxful buckaroo buffalo buffoon buxom buzzard buzzing buzzwords caliph cobweb cockiness croquet crypt cycle disavow dizzying duplex dwarves embezzle equip espionage exodus faking fishhook fixable fjord flapjack flopping fluffiness flyby foxglove frazzled frizzled fuchsia funny gabby galaxy galvanize gazebo gizmo glowworm glyph gnarly gnostic gossip grogginess haiku haphazard hyphen icebox injury ivory ivy jackpot jaundice jawbreaker jaywalk jazziest jazzy jelly jigsaw jinx jiujitsu jockey jogging joking jovial joyful juicy jukebox jumbo kayak kazoo keyhole khaki kilobyte kiosk kiwifruit klutz knapsack larynx lengths lucky luxury lymph marquis matrix megahertz microwave mnemonic mystify naphtha nightclub nowadays numbskull nymph onyx ovary oxidize oxygen pajama peekaboo phlegm pixel pizazz pneumonia polka psyche puppy puzzling quartz queue quips quixotic quiz quizzes quorum rhubarb rhythm rickshaw schnapps scratch shiv snazzy sphinx spritz squawk staff strength strengths stretch subway swivel syndrome thriftless thumbscrew topaz transcript transgress transplant twelfth twelfths unknown unworthy unzip uptown vaporize vixen vodka voodoo vortex voyeurism walkway waltz wave wavy waxy wellspring wheezy whiskey whizzing whomever wimpy witchcraft wizard woozy wristwatch wyvern xylophone yachts yippee yoked youthful yummy zigzag zilch zipper zodiac zombie'.split()
+        
         #could draw from a txt document if we really care
         self._hidden = []
         self._solved =[]
+        self._difficulty = ""
         
 
     def generate_word(self):
@@ -29,8 +32,10 @@ class Word:
       Args:
         self (Word): An instance of Word.
       """
-
-      choice = random.choice(self._master_list)
+      if self._difficulty.lower() == "easy":
+        choice = random.choice(self._easy_list)
+      else:
+        choice = random.choice(self._hard_list)
       self._hidden = list(choice)
       for _ in range(len(self._hidden)):
         self._solved.append("_")

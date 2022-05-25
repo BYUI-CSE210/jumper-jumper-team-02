@@ -1,7 +1,6 @@
 from game.terminal_service import TerminalService
 from game.word import Word
 from game.parachute import Parachute
-#from game.bcolors import Bcolors       #what
 
 
 """
@@ -32,14 +31,17 @@ class Director:
         """
         self._is_playing = True
         self._terminal_service = TerminalService()
-        self._word = Word()
         self._parachute = Parachute()
-        self._word.generate_word()
         self._guess = ""
-        #parachute picture string
+
+        self._word = Word()
+        self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
+        while self._word._difficulty not in ["easy", "medium", "hard"]:
+            self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
+
+        self._word.generate_word()
         
-            #what
-        #self._parachute = " _____\n/_____\ \n \   /\n  \ /\n   0\n  /|\ \n  / \ \n \n^^^^^^^  "
+        
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -47,6 +49,7 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+
         while self._is_playing:
             self._get_inputs()
             self._do_updates()
@@ -59,12 +62,10 @@ class Director:
             self (Director): An instance of Director.
         """
 
-        print(self._word._hidden)#comment this out
-        print(self._word._solved)#keep this  
+        print(self._word._hidden)#comment these out
+        for i in self._word._solved:
+            print(f"{i} ", end = "")  
         
-            #what
-        #print(self._parachute)   # print parachute picture string
-        #print(f"{Bcolors.WARNING}{self._parachute}{Bcolors.ENDC}")
 
         #get input from user
         #input validation [only letters a-z]
@@ -72,7 +73,6 @@ class Director:
         self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
         while not (self._guess.isalpha()) or (len(self._guess) != 1):
             self._guess = self._terminal_service.read_text("\nGuess a letter [a-z]: ")
-        #print("Good")#comment out
         
         pass
 
@@ -91,11 +91,7 @@ class Director:
             #remove letter from the array of the hidden word
         #else:
             #remove a line from the parachute
-
-
-        #print parachute
-        # self._parachute.print_parachute()
-
+            #adds to the lose counter
 
         if self._guess in self._word._hidden:
             for i in self._word._hidden:
@@ -103,19 +99,10 @@ class Director:
                    index = self._word._hidden.index(i)
                    self._word._solved[index] = i
                    self._word._hidden[index] = ""
-        #else:
-            
-            #remove a line from the parachute
         else:
-            self._parachute.pop(0)
-
-                #what
-            #self._parachute = self._parachute[1:] #remove first charachter from the parachute
-            
-
-
-
-        
+                #CHANGE THIS TO FIT SYNTAX
+            self._parachute.drawing.pop(0)
+            self._parachute.counter += 1
 
         pass
 
@@ -130,8 +117,12 @@ class Director:
 
         #print out the current solved portion of the word.
 
-        self._parachute._print_parachute()
+            #CHANGE THIS TO FIT SYNTAX
+        print(self._parachute.drawing())
 
-        self._parachute._print_solved()
+        for i in self._word._solved:
+            print(f"{i} ")
+
+        
 
         pass
