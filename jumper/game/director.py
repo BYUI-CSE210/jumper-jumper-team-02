@@ -157,7 +157,7 @@ class Director:
             self (Director): An instance of Director.
         """
 
-        print("Welcome to Jumper! A word guessing game where you try to guess all the letters of the given word! \n")
+        self._terminal_service.write_text("Welcome to Jumper! A word guessing game where you try to guess all the letters of the given word! \n")
 
         self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
         while self._word._difficulty not in ["easy", "medium", "hard"]:
