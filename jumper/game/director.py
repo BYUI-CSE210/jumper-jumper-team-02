@@ -63,9 +63,9 @@ class Director:
             print(f"{i} ", end = "") 
 
         if self._win == True:
-            print("\n\nCongratulations! You win!")
+            self._terminal_service.write_text("\n\nCongratulations! You win!")
         else:
-            print("\n\nYou lose!")
+            self._terminal_service.write_text("\n\nYou lose!")
 
 
     def _get_inputs(self):
@@ -157,7 +157,7 @@ class Director:
             self (Director): An instance of Director.
         """
 
-        self._terminal_service.write_text("Welcome to Jumper! A word guessing game where you try to guess all the letters of the given word! \n")
+        self._terminal_service.welcome_text() # print the welcome text using the terminal_service class
 
         self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
         while self._word._difficulty not in ["easy", "medium", "hard"]:
