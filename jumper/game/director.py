@@ -22,6 +22,7 @@ class Director:
         parachute: The drawing of the parachute and our lose condition
         word: The word being guessed and our win condition
         guess: The current guessed letter
+        final_answer: the originally chosen word, in full.
     """
         #the word being guessed
 
@@ -37,15 +38,9 @@ class Director:
         self._parachute = Parachute()
         self._guess = ""
         self._word = Word()
+        self._final_answer = ""
 
         self._opening_moves()
-
-        # The user chooses the level of difficulty
-        self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
-        while self._word._difficulty not in ["easy", "medium", "hard"]:
-            self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
-
-        self._word.generate_word() # call the generate_word method from the word class
         
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -63,9 +58,10 @@ class Director:
             print(f"{i} ", end = "") 
 
         if self._win == True:
-            self._terminal_service.write_text("\n\nCongratulations! You win!")
+            print("\n\nCongratulations! You win!")
         else:
-            self._terminal_service.write_text("\n\nYou lose!")
+            print("\n\nSorry! You lose!")
+        self._word._reveal_answer()
 
 
     def _get_inputs(self):
@@ -76,7 +72,7 @@ class Director:
         """
 
         # Print hidden word
-        print(self._word._hidden)
+        #print(self._word._hidden) #comment this out
 
         for i in self._word._solved:
             print(f"{i} ", end = "")  
@@ -126,14 +122,6 @@ class Director:
             self (Director): An instance of Director.
         """
 
-        #print out the current state of the parachute
-
-        #print out the current solved portion of the word.
-
-            #CHANGE THIS TO FIT SYNTAX
-        for i in self._parachute._drawing:
-            print(i)
-
         #Check to see if we lost or won the game
 
             #check to see if the word is solved by checking word.hidden for letters
@@ -145,8 +133,13 @@ class Director:
             #check to see if we ran out of parachute
         if self._is_playing == True:
             if self._parachute._counter == self._parachute._death:
+                self._parachute._dead_head()
                 self._is_playing = False
                 self._win = False
+
+        #print out the current state of the parachute
+        self._parachute._print_parachute()
+
         pass
 
 
@@ -159,8 +152,5 @@ class Director:
 
         self._terminal_service.welcome_text() # print the welcome text using the terminal_service class
 
-        self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
-        while self._word._difficulty not in ["easy", "medium", "hard"]:
-            self._word._difficulty = input("Choose your difficulty: [easy/medium/hard]")
-
-        self._word.generate_word()
+        #create the word to be guessed
+        self._word._generate_word()

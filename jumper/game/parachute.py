@@ -18,3 +18,16 @@ class Parachute:
         self._drawing = ["  _____", " /_____\\", " \     /", "  \   /", "   \ /", "    0", "   /|\\", "   / \\", "", "^^^^^^^^^^"]
         self._counter = 0
         self._death = 5
+        self._terminal_service = TerminalService()
+
+    def _dead_head(self):
+        """Upon losing, turns the head into an 'X'.
+
+        Args:
+            self (parachute): An instance of parachute.
+        """
+        self._drawing[0] = "    X"
+
+    def _print_parachute(self):
+        for i in self._drawing:
+            self._terminal_service.write_text(i)
