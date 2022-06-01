@@ -37,3 +37,53 @@ class TerminalService:
             text (string): The text to display.
         """
         print(text)
+
+    
+    def welcome_text(self):
+        """Displays the welcome text on the terminal. 
+
+        Args: 
+            self (TerminalService): An instance of TerminalService.
+            
+        """
+        print()
+        print("=================================================================================================\n")
+        print("Welcome to Jumper! A word guessing game where you try to guess all the letters of the given word!\n")
+        print("=================================================================================================\n")
+
+    def print_solved(self, word):
+        """Prints the solved portion of our word. 
+
+        Args: 
+            self (TerminalService): An instance of TerminalService.
+            
+        """
+        for i in word:
+            print(f"{i} ", end = "")
+
+    def you_win(self):
+        """Tells the user they won. 
+
+        Args: 
+            self (TerminalService): An instance of TerminalService.
+            
+        """
+        print("\n\nCongratulations! You win!")
+
+    def you_lose(self):
+        """Tells the user they lost. 
+
+        Args: 
+            self (TerminalService): An instance of TerminalService.
+            
+        """
+        print("\n\nSorry! You lose!")
+
+    def invalid_entry(self):
+        """Tells the user their entry is invalid.
+
+        Args: 
+            self (TerminalService): An instance of TerminalService.
+            
+        """
+        print("Invalid entry!")
