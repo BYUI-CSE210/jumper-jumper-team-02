@@ -30,14 +30,13 @@ class Word:
         self._medium_list = 'square death magnificent calculator famous marble petite archetypal aware paddle brave bushes waiting confess overjoyed shocking hushed hilarious female shame stimulating dinner doctor scribble heartbreaking rabid haunt arrive serious confused educated oafish nation sticky helpful reading recognise'.split() # medium list of words
         self._hard_list = 'banjo bayou beekeeper bikini blitz blizzard boggle bookworm heartbreaking boxful buckaroo buffalo buffoon buxom buzzard buzzing buzzwords caliph cobweb cockiness croquet crypt cycle disavow dizzying duplex dwarves embezzle equip espionage exodus faking fishhook fixable fjord flapjack flopping fluffiness flyby foxglove frazzled frizzled fuchsia funny gabby galaxy galvanize gazebo gizmo glowworm glyph gnarly gnostic gossip grogginess haiku haphazard hyphen icebox injury ivory ivy jackpot jaundice jawbreaker jaywalk jazziest jazzy jelly jigsaw jinx jiujitsu jockey jogging joking jovial joyful juicy jukebox jumbo kayak kazoo keyhole khaki kilobyte kiosk kiwifruit klutz knapsack larynx lengths lucky luxury lymph marquis matrix megahertz microwave mnemonic mystify naphtha nightclub nowadays numbskull nymph onyx ovary oxidize oxygen pajama peekaboo phlegm pixel pizazz pneumonia polka psyche puppy puzzling quartz queue quips quixotic quiz quizzes quorum rhubarb rhythm rickshaw schnapps scratch shiv snazzy sphinx spritz squawk staff strength strengths stretch subway swivel syndrome thriftless thumbscrew topaz transcript transgress transplant twelfth twelfths unknown unworthy unzip uptown vaporize vixen vodka voodoo vortex voyeurism walkway waltz wave wavy waxy wellspring wheezy whiskey whizzing whomever wimpy witchcraft wizard woozy wristwatch wyvern xylophone yachts yippee yoked youthful yummy zigzag zilch zipper zodiac zombie'.split()
         
-        #could draw from a txt document if we really care
         self._choice = ""
         self._hidden = []
         self._solved =[]
         self._difficulty = ""
         
 
-    def _generate_word(self):
+    def generate_word(self):
       """Picks a word from the list
 
       Args:
@@ -54,7 +53,7 @@ class Word:
        self._choice = random.choice(self._medium_list)
       else:
         self._choice = random.choice(self._hard_list)
-      print(self._choice)
+      
 
       #sets that as hidden_word
       #sets an empty array the length of hidden_word as solved_word
@@ -74,7 +73,14 @@ class Word:
       while self._difficulty not in ["easy", "medium", "hard"]:
         self._difficulty = self._terminal_service.read_text("Choose your difficulty: [easy/medium/hard]")
 
-
+    def process_guess(self, guess):
+      
+      for i in self._hidden:
+          if i == guess:
+             index = self._hidden.index(i)
+             self._solved[index] = i
+             self._hidden[index] = ""
+            
 
     def reveal_answer(self):
       """Prints the final answer.
