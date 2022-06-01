@@ -76,10 +76,27 @@ class Word:
 
 
 
-    def _reveal_answer(self):
+    def reveal_answer(self):
       """Prints the final answer.
 
       Args:
         self (Word): An instance of Word.
       """
-      self._terminal_service.write_text(f"The word was {self._choice}!") 
+      self._terminal_service.write_text(f"The word was {self._choice}!")
+
+    def get_hidden(self):
+      """Getter for hidden
+
+      Args:
+        self (Word): An instance of Word.
+      """
+      return self._hidden
+
+    def get_solved(self):
+      """Getter for solved
+
+      Args:
+        self (Word): An instance of Word.
+      """
+      return self._solved
+

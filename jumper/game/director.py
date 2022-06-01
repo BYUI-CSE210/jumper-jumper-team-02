@@ -19,8 +19,10 @@ class Director:
         is_playing (boolean): Whether or not to keep playing.
         win (boolean): Have we lost or won the game?
         terminal_service: For getting and displaying information on the terminal.
-        parachute: The drawing of the parachute and our lose condition
-        word: The word being guessed and our win condition
+        parachute: An instance of Parachute Class
+        word: An instance of the Word Class
+        solved: the solved portion of the word.
+        hidden: the hidden portion of the word.
         guess: The current guessed letter
         final_answer: the originally chosen word, in full.
     """
@@ -39,6 +41,8 @@ class Director:
         self._guess = ""
         self._word = Word()
         self._final_answer = ""
+        self._hidden = ""
+        self._solved = ""
 
         self._opening_moves()
         
@@ -54,14 +58,14 @@ class Director:
             self._do_updates()
             self._do_outputs()
 
-        for i in self._word._solved:
+        for i in self._solved:
             print(f"{i} ", end = "") 
 
         if self._win == True:
             print("\n\nCongratulations! You win!")
         else:
             print("\n\nSorry! You lose!")
-        self._word._reveal_answer()
+        self._word.reveal_answer()
 
 
     def _get_inputs(self):
@@ -74,7 +78,7 @@ class Director:
         # Print hidden word
         #print(self._word._hidden) #comment this out
 
-        for i in self._word._solved:
+        for i in self._solved:
             print(f"{i} ", end = "")  
 
         #get input from user
@@ -104,12 +108,12 @@ class Director:
             #remove a line from the parachute
             #adds to the lose counter
 
-        if self._guess in self._word._hidden:
-            for i in self._word._hidden:
+        if self._guess in self._hidden:
+            for i in self._hidden:
                 if i == self._guess:
-                   index = self._word._hidden.index(i)
-                   self._word._solved[index] = i
-                   self._word._hidden[index] = ""
+                   index = self._hidden.index(i)
+                   self._solved[index] = i
+                   self._hidden[index] = ""
         else:
             self._parachute._drawing.pop(0)
             self._parachute._counter += 1
@@ -126,7 +130,7 @@ class Director:
 
             #check to see if the word is solved by checking word.hidden for letters
         self._is_playing = False
-        for i in self._word._hidden:
+        for i in self._hidden:
             if i != "":
                 self._is_playing = True
 
@@ -154,3 +158,5 @@ class Director:
 
         #create the word to be guessed
         self._word._generate_word()
+        self._hidden = self._word.get_hidden()
+        self._solved = self._word.get_solved()
